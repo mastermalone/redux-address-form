@@ -1,0 +1,32 @@
+{
+  "name": "redux-address-form",
+  "version": "1.0.0",
+  "description": "Redux Form",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mastermalone/redux-address-form.git"
+  },
+  "keywords": [
+    "Redux",
+    "Address",
+    "form"
+  ],
+  "author": "mastermalone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mastermalone/redux-address-form/issues"
+  },
+  "homepage": "https://github.com/mastermalone/redux-address-form#readme",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "combine-reducers": "^1.0.0",
+    "create-react-app": "^2.1.8",
+    "jquery": "^3.3.1",
+    "redux": "^4.0.1",
+    "redux-form": "^8.1.0"
+  }
+}
