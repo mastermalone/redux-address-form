@@ -1,6 +1,8 @@
 import React from "react";
 
 const FormInput = ({
+  labelName,
+  checked,
   type,
   className,
   label,
@@ -8,10 +10,8 @@ const FormInput = ({
   meta: { touched, error }
 }) => (
   <div className={className}>
-    <div>
-      <label>{label}</label>
-      <input {...input} placeholder={label} type={type} />
-    </div>
+    <label htmlFor={labelName}>{label}</label>
+    <input id={labelName} {...input} placeholder={label} type={type} checked={checked} className={type === 'radio' ? 'form-check-label': 'form-control'} />
   </div>
 );
 

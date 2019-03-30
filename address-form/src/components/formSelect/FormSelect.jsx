@@ -2,23 +2,21 @@ import React from "react";
 
 const FormSelect = ({
   data,
-  type,
   className,
   label,
   input,
   meta: { touched, error }
 }) => (
-  <div className={className}>
-    <div>
-      <label>{label}</label>
-      <input {...input} placeholder={label} type={type} />
-      <select name={label} id={label}>
-        {data.map(item => (
-          <option>{item}</option>
-        ))}
-      </select>
-    </div>
+  
+  <div className="form-group">
+    <label>{label}</label>
+    <select className={className} {...input} name={label} id={label}>
+      {data.map((item, idx) => (
+        <option key={idx}>{item.name}</option>
+      ))}
+    </select>
   </div>
+  
 );
 
 export default FormSelect;
