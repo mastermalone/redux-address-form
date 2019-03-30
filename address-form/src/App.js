@@ -2,24 +2,28 @@ import React, { Component } from "react";
 import AddressForm from "./components/addressForm/AddressFormContainer";
 import axios from "axios";
 import UpdateAddressForm from "./components/addressForm/AddressFormActionCreator";
+import AddressFormValidation from "./components/addressForm/AddressFormValidation";
 import "./App.css";
-import 'jquery';
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.css'
+import "jquery";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
 import store from "./store/store";
 
 class App extends Component {
   submit = values => {
+    const formFieldValuesObject = store.getState().form["address-form"].values;
+    const formFields = store.getState().form["address-form"].fields;
     console.log("App submitting", values);
+    AddressFormValidation(formFieldValuesObject, formFields);
     return values;
   };
 
-  defaultCountry = 'United States'
+  defaultCountry = "United States";
 
   formOnChange = values => {
-    console.log('ON Change', values.country);
-    return values.country || 'United States';
-  }
+    console.log("ON Change", values.country);
+    return values.country || "United States";
+  };
 
   formatCountryData(data) {
     const formattedCountryData = {};
@@ -28,16 +32,16 @@ class App extends Component {
         formattedCountryData[key.name] = key;
       }
     }
-    console.log('FORMATTED COUNTRY DATA', formattedCountryData);
+    console.log("FORMATTED COUNTRY DATA", formattedCountryData);
     return formattedCountryData;
   }
 
   state = {
-    countries:[]
+    countries: []
   };
 
   componentDidMount() {
-    const getData =  async() => {
+    const getData = async () => {
       await axios({
         method: "get",
         url: "./json/countriesStates.json"
@@ -60,14 +64,14 @@ class App extends Component {
     const formattedCountries = this.formatCountryData(countries);
     return (
       <div className="App">
-        {this.state.countries.length > 0 &&
-        <AddressForm 
-          onSubmit={this.submit} 
-          dropdownData={formattedCountries} 
-          onChange={this.formOnChange} 
-          defaultCountry={this.defaultCountry}
+        {this.state.countries.length > 0 && (
+          <AddressForm
+            onSubmit={this.submit}
+            dropdownData={formattedCountries}
+            onChange={this.formOnChange}
+            defaultCountry={this.defaultCountry}
           />
-        }
+        )}
       </div>
     );
   }

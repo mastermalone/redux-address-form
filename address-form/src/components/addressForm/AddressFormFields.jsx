@@ -1,12 +1,19 @@
 import React from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { Field, reduxForm, formValueSelector } from "redux-form";
 import FormInput from "../formInput/FormInput";
 import FormSelect from "../formSelect/FormSelect";
 import RadioButtonGroup from "../radioButtonGroup/RadioButtonGroup";
 
 let AddressFields = props => {
-  const { handleSubmit, onChange, defaultCountry, dropdownData, country } = props;
+  console.log("THE PROPS", props);
+  const {
+    handleSubmit,
+    onChange,
+    defaultCountry,
+    dropdownData,
+    country
+  } = props;
   return (
     <form onSubmit={handleSubmit}>
       <Field
@@ -49,7 +56,12 @@ let AddressFields = props => {
         type="email"
         labelName="email"
       />
-      <RadioButtonGroup buttonList={dropdownData} onChange={onChange} checked={true} className="form-check-label"/>
+      <RadioButtonGroup
+        buttonList={dropdownData}
+        onChange={onChange}
+        checked={true}
+        className="form-check-label"
+      />
       <Field
         name="state"
         label="State"
@@ -59,23 +71,32 @@ let AddressFields = props => {
         onChange={onChange}
         labelName="state"
       />
-      <button type="submit" className="btn btn-primary">Submit</button>
+      <button type="submit" className="btn btn-primary float-right">
+        Submit
+      </button>
     </form>
   );
 };
 
 // Set up the form value selector to get the field values
-const selector = formValueSelector('address-form');
-AddressFields = connect(
-  state => {
-    const country = selector(state, 'country');//Name of the radio buttons is country
-    return {
-      country
-    }
-  }
-)(AddressFields);
+const selector = formValueSelector("address-form");
+AddressFields = connect(state => {
+  const country = selector(state, "country"); //Name of the radio buttons is country
+  const firstName = selector(state, "firstName");
+  const lastName = selector(state, "lastName");
+  const address1 = selector(state, "address1");
+  const address2 = selector(state, "address2");
+  const email = selector(state, "email");
+  return {
+    country,
+    firstName,
+    lastName,
+    address1,
+    address2,
+    email
+  };
+})(AddressFields);
 
 export default reduxForm({
   form: "address-form"
 })(AddressFields);
-
