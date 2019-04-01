@@ -7,11 +7,20 @@ const FormInput = ({
   className,
   label,
   input,
-  meta: { touched, error }
+  meta: { touched, error, warning }
 }) => (
   <div className={className}>
     <label htmlFor={labelName}>{label}</label>
-    <input id={labelName} {...input} placeholder={label} type={type} checked={checked} className={type === 'radio' ? 'form-check-label': 'form-control'} />
+    <input
+      id={labelName}
+      {...input}
+      placeholder={label}
+      type={type}
+      checked={checked}
+      className={type === "radio" ? "form-check-label" : "form-control"}
+    />
+    {touched &&
+      ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
   </div>
 );
 

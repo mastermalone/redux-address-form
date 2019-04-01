@@ -6,7 +6,7 @@ const AddressFormValidation = (formFieldValuesObject, formFields) => {
 
   Object.keys(formFields).forEach(field => {
     if (!formFieldValuesObject[field]) {
-      inValidFields[field] = field;
+      inValidFields[field] = "Required";
     }
 
     console.log("Invalid feilds", inValidFields);

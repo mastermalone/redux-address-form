@@ -8,7 +8,17 @@ class AddressForm extends Component {
   }
 
   render() {
-    return <AddresFields onSubmit={this.props.onSubmit} dropdownData={this.props.dropdownData} onChange={this.props.onChange} defaultCountry={this.props.defaultCountry}/>;
+    let { ...props } = this.props;
+    console.log("THIS.PROPS", props);
+    return (
+      <AddresFields
+        onSubmit={props.onSubmit}
+        dropdownData={props.dropdownData}
+        onChange={props.onChange}
+        defaultCountry={props.defaultCountry}
+        {...props}
+      />
+    );
   }
 }
 

@@ -7,8 +7,7 @@ const FormSelect = ({
   input,
   meta: { touched, error }
 }) => (
-  
-  <div className="form-group">
+  <div className="form-group clearfix">
     <label>{label}</label>
     <select className={className} {...input} name={label} id={label}>
       {data.map((item, idx) => (
@@ -16,7 +15,6 @@ const FormSelect = ({
       ))}
     </select>
   </div>
-  
 );
 
 export default FormSelect;
