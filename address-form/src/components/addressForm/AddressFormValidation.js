@@ -1,3 +1,5 @@
+// This is currently not used.  Not until I find a way to make it work.
+// This will allow mw to create validation for the fields dynamically
 const AddressFormValidation = (formFieldValuesObject, formFields) => {
   if (!formFieldValuesObject) {
     formFieldValuesObject = {};
@@ -8,10 +10,9 @@ const AddressFormValidation = (formFieldValuesObject, formFields) => {
     if (!formFieldValuesObject[field]) {
       inValidFields[field] = "Required";
     }
-
-    console.log("Invalid feilds", inValidFields);
-    return inValidFields;
   });
+
+  return inValidFields;
 };
 
 export default AddressFormValidation;

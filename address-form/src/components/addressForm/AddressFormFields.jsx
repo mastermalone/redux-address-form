@@ -4,9 +4,10 @@ import { Field, reduxForm, formValueSelector } from "redux-form";
 import FormInput from "../formInput/FormInput";
 import FormSelect from "../formSelect/FormSelect";
 import RadioButtonGroup from "../radioButtonGroup/RadioButtonGroup";
+import validate from "../../validation/AddressFormValidation";
 
 let AddressFields = props => {
-  console.log("THE PROPS", props);
+  console.log("THE FIELD VAL PROPS", props);
   const {
     handleSubmit,
     onChange,
@@ -72,6 +73,7 @@ let AddressFields = props => {
           onChange={onChange}
           checked={true}
           className="form-check-label float-left"
+          country={country}
         />
       )}
       {!props.hideStates && (
@@ -121,6 +123,7 @@ AddressFields = connect(state => {
   const address1 = selector(state, "address1");
   const address2 = selector(state, "address2");
   const city = selector(state, "city");
+  const zipcode = selector(state, "zipcode");
   const email = selector(state, "email");
   return {
     country,
@@ -129,10 +132,12 @@ AddressFields = connect(state => {
     address1,
     address2,
     city,
+    zipcode,
     email
   };
 })(AddressFields);
 
 export default reduxForm({
-  form: "address-form"
+  form: "address-form",
+  validate
 })(AddressFields);

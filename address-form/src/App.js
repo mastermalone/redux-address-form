@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import AddressForm from "./components/addressForm/AddressFormContainer";
 import axios from "axios";
-import UpdateAddressForm from "./components/addressForm/AddressFormActionCreator";
+import GetStatesActionCreator from "./components/addressForm/GetStatesActionCreator";
+import ValidateAddressFormActionCreator from "./components/addressForm/ValidateAddressFormActionCreator";
 import AddressFormValidation from "./components/addressForm/AddressFormValidation";
 import "./App.css";
 import "jquery";
@@ -13,6 +14,11 @@ class App extends Component {
   submit = values => {
     const formFieldValuesObject = store.getState().form["address-form"].values;
     const formFields = store.getState().form["address-form"].fields;
+    store.dispatch(
+      ValidateAddressFormActionCreator(
+        AddressFormValidation(formFieldValuesObject, formFields)
+      )
+    );
     console.log("App submitting", values);
     AddressFormValidation(formFieldValuesObject, formFields);
     return values;
@@ -47,9 +53,9 @@ class App extends Component {
         url: "./json/countriesStates.json"
       })
         .then(response => {
-          store.dispatch(UpdateAddressForm(response.data));
+          store.dispatch(GetStatesActionCreator(response.data));
           this.setState({
-            countries: store.getState().AddressFormReducer.addressFormData
+            countries: store.getState().GetStatesReducer.statesData
           });
         })
         .catch(err => {

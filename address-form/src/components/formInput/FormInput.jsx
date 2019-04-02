@@ -20,7 +20,8 @@ const FormInput = ({
       className={type === "radio" ? "form-check-label" : "form-control"}
     />
     {touched &&
-      ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+      ((error && <small className="text-danger">{error}</small>) ||
+        (warning && <small className="text-warning">{warning}</small>))}
   </div>
 );
 

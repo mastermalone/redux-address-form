@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
-import AddressFormReducer from "../components/addressForm/AddressFormReducer";
+import GetStatesReducer from "../components/addressForm/GetStatesReducer";
+import ValidateAddressFormReducer from "../components/addressForm/ValidateAddressFormReducer";
 
 const RootReducer = combineReducers({
-  AddressFormReducer,
+  GetStatesReducer,
+  ValidateAddressFormReducer,
   form: formReducer
 });
 

@@ -9,7 +9,6 @@ class AddressForm extends Component {
 
   render() {
     let { ...props } = this.props;
-    console.log("THIS.PROPS", props);
     return (
       <AddresFields
         onSubmit={props.onSubmit}

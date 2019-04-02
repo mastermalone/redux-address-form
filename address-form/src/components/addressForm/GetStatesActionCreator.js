@@ -1,8 +1,8 @@
-import { UPDATE_ADDRESS_FORM } from "./AddressFormActions";
+import { GET_STATES_DATA } from "./AddressFormActions";
 
 const UpdateAddressForm = payload => {
   return {
-    type: UPDATE_ADDRESS_FORM,
+    type: GET_STATES_DATA,
     payload
   };
 };
