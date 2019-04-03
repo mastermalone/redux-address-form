@@ -3,12 +3,10 @@ import { connect } from "react-redux";
 import AddresFields from "../addressForm/AddressFormFields";
 
 class AddressForm extends Component {
-  componentDidMount() {
-    console.log("Form Mounted");
-  }
-
+  
   render() {
     let { ...props } = this.props;
+    console.log('The container props', props)
     return (
       <AddresFields
         onSubmit={props.onSubmit}

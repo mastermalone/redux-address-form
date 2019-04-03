@@ -7,7 +7,6 @@ import RadioButtonGroup from "../radioButtonGroup/RadioButtonGroup";
 import validate from "../../validation/AddressFormValidation";
 
 let AddressFields = props => {
-  console.log("THE FIELD VAL PROPS", props);
   const {
     handleSubmit,
     onChange,
@@ -138,6 +137,5 @@ AddressFields = connect(state => {
 })(AddressFields);
 
 export default reduxForm({
-  form: "address-form",
   validate
 })(AddressFields);

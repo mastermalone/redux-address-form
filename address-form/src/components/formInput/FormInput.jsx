@@ -9,7 +9,7 @@ const FormInput = ({
   input,
   meta: { touched, error, warning }
 }) => (
-  <div className={className}>
+  <div className={className+' has-success'}>
     <label htmlFor={labelName}>{label}</label>
     <input
       id={labelName}
@@ -19,6 +19,7 @@ const FormInput = ({
       checked={checked}
       className={type === "radio" ? "form-check-label" : "form-control"}
     />
+    {type!== "radio" && <span className="glyphicon glyphicon-ok form-control-feedback"></span>}
     {touched &&
       ((error && <small className="text-danger">{error}</small>) ||
         (warning && <small className="text-warning">{warning}</small>))}
