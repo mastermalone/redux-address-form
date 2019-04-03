@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import AddressForm from "./components/addressForm/AddressFormContainer";
 import axios from "axios";
 import GetStatesActionCreator from "./components/addressForm/GetStatesActionCreator";
-// import ValidateAddressFormActionCreator from "./customValidation/ValidateAddressFormActionCreator";
-// import AddressFormValidation from "./customValidation/CustomAddressFormValidation";
 import "./App.css";
 import "jquery";
 import "bootstrap";
@@ -12,15 +10,6 @@ import store from "./store/store";
 
 class App extends Component {
   submit = values => {
-    const formFieldValuesObject = store.getState().form["address-form"].values;
-    const formFields = store.getState().form["address-form"].fields;
-    // store.dispatch(
-    //   ValidateAddressFormActionCreator(
-    //     AddressFormValidation(formFieldValuesObject, formFields)
-    //   )
-    // );
-    // console.log("App submitting", values);
-    // AddressFormValidation(formFieldValuesObject, formFields);
     return values;
   };
 
