@@ -37,7 +37,7 @@ AddressForm.defaultProps = {
 
 AddressForm.propTypes = {
   onSubmit: PropTypes.func,
-  dropdownData: PropTypes.instanceOf(AddressForm.dropdownData),
+  dropdownData: PropTypes.instanceOf(Object),
   onChange: PropTypes.func,
   defaultCountry: PropTypes.string,
 };

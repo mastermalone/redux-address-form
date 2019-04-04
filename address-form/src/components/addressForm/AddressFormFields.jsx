@@ -147,7 +147,7 @@ AddressFields.propTypes = {
   handleSubmit: PropTypes.func,
   onChange: PropTypes.func,
   defaultCountry: PropTypes.string,
-  dropdownData: PropTypes.instanceOf(AddressFields.dropdownData),
+  dropdownData: PropTypes.object,
   country: PropTypes.string,
   hideFirstName: PropTypes.bool,
   hideLastName: PropTypes.bool,
