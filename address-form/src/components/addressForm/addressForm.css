@@ -1,0 +1,21 @@
+form.container {
+  position: relative;
+}
+.form-group {
+  position: relative;
+}
+.has-success .form-control {
+  padding-right: 40px;
+}
+.glyphicon-ok {
+  background: url('../../static/media/checkmark.svg') no-repeat;
+  width: 30px;
+  padding:12px;
+  position: absolute;
+  top:40px;
+  right: 2px;
+}
+
+.form-check-label {
+  margin-right: 10px;
+}

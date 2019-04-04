@@ -23,7 +23,7 @@
   color: #61dafb;
 }
 
-form.container {
+/* form.container {
   position: relative;
 }
 .form-group {
@@ -43,7 +43,7 @@ form.container {
 
 .form-check-label {
   margin-right: 10px;
-}
+} */
 
 @keyframes App-logo-spin {
   from {

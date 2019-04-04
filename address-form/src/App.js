@@ -16,7 +16,6 @@ class App extends Component {
   defaultCountry = "United States";
 
   formOnChange = values => {
-    console.log("ON Change", values.country);
     return values.country || "United States";
   };
 
@@ -27,7 +26,6 @@ class App extends Component {
         formattedCountryData[key.name] = key;
       }
     }
-    console.log("FORMATTED COUNTRY DATA", formattedCountryData);
     return formattedCountryData;
   }
 
@@ -48,7 +46,7 @@ class App extends Component {
           });
         })
         .catch(err => {
-          console.warn("There was an error fetcing the states", err);
+          console.warn("There was an error fetching the states", err);
         });
     };
     getData();
@@ -59,15 +57,32 @@ class App extends Component {
     const formattedCountries = this.formatCountryData(countries);
     return (
       <div className="App">
-        {this.state.countries.length > 0 && (
-          <AddressForm
-            onSubmit={this.submit}
-            dropdownData={formattedCountries}
-            onChange={this.formOnChange}
-            defaultCountry={this.defaultCountry}
-            form="address-form"
-          />
-        )}
+        <div>
+          {this.state.countries.length > 0 && (
+            <AddressForm
+              onSubmit={this.submit}
+              dropdownData={formattedCountries}
+              onChange={this.formOnChange}
+              defaultCountry={this.defaultCountry}
+              form="address-form"
+            />
+          )}
+        </div>
+        {/* <br/>
+        <br/>
+
+        <div>
+          {this.state.countries.length > 0 && (
+            <AddressForm
+              onSubmit={this.submit}
+              dropdownData={formattedCountries}
+              onChange={this.formOnChange}
+              defaultCountry={this.defaultCountry}
+              form="my-address-form"
+              hideStates={true}
+            />
+          )}
+        </div> */}
       </div>
     );
   }

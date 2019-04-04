@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const FormInput = ({
   labelName,
@@ -7,9 +7,9 @@ const FormInput = ({
   className,
   label,
   input,
-  meta: { touched, error, warning }
+  meta: { touched, error, warning },
 }) => (
-  <div className={className+' has-success'}>
+  <div className={`${className} has-success`}>
     <label htmlFor={labelName}>{label}</label>
     <input
       id={labelName}
@@ -17,12 +17,14 @@ const FormInput = ({
       placeholder={label}
       type={type}
       checked={checked}
-      className={type === "radio" ? "form-check-label" : "form-control"}
+      className={type === 'radio' ? 'form-check-label' : 'form-control'}
     />
-    {type!== "radio" && <span className="glyphicon glyphicon-ok form-control-feedback"></span>}
-    {touched &&
-      ((error && <small className="text-danger">{error}</small>) ||
-        (warning && <small className="text-warning">{warning}</small>))}
+    {type !== 'radio' && !error && (
+      <span className="glyphicon glyphicon-ok form-control-feedback" />
+    )}
+    {touched
+      && ((error && <small className="text-danger">{error}</small>)
+        || (warning && <small className="text-warning">{warning}</small>))}
   </div>
 );
 

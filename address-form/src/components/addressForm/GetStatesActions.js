@@ -1,0 +1,1 @@
+export const GET_STATES_DATA = "GET_STATES_DATA";

@@ -1,4 +1,4 @@
-import { GET_STATES_DATA } from "./AddressFormActions";
+import { GET_STATES_DATA } from "./GetStatesActions";
 
 const initialState = {
   statesData: {}

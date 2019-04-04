@@ -1,27 +1,50 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import AddresFields from "../addressForm/AddressFormFields";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-class AddressForm extends Component {
-  
-  render() {
-    let { ...props } = this.props;
-    console.log('The container props', props)
-    return (
-      <AddresFields
-        onSubmit={props.onSubmit}
-        dropdownData={props.dropdownData}
-        onChange={props.onChange}
-        defaultCountry={props.defaultCountry}
-        {...props}
-      />
-    );
-  }
-}
+import AddresFields from './AddressFormFields';
+import './addressForm.css';
 
-const mapStateToProps = state => {
+/**
+ * @summary This container passes country states/provvinces to the addressField component
+ * @property {Array} props.dropdownData
+ * @property {String} props.defaultCountry
+ */
+const AddressForm = (props) => {
+  const {
+    onSubmit,
+    dropdownData,
+    onChange,
+    defaultCountry,
+  } = props;
+  return (
+    <AddresFields
+      onSubmit={onSubmit}
+      dropdownData={dropdownData}
+      onChange={onChange}
+      defaultCountry={defaultCountry}
+      {...props}
+    />
+  );
+};
+
+AddressForm.defaultProps = {
+  onSubmit: () => false,
+  dropdownData: [],
+  onChange: () => false,
+  defaultCountry: 'United States',
+};
+
+AddressForm.propTypes = {
+  onSubmit: PropTypes.func,
+  dropdownData: PropTypes.instanceOf(AddressForm.dropdownData),
+  onChange: PropTypes.func,
+  defaultCountry: PropTypes.string,
+};
+
+const mapStateToProps = (state) => {
   return {
-    state: state
+    state,
   };
 };
 

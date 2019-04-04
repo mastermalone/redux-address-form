@@ -1,7 +1,7 @@
-import { VALIDATE_ADDRESS_FORM } from "../components/addressForm/AddressFormActions";
+import { VALIDATE_ADDRESS_FORM } from "../components/addressForm/GetStatesActions";
 
 const initialState = {
-  validatedaddressFormFields: {}
+  validatedAddressFormFields: {}
 };
 const ValidateAddressFormReducer = (state = initialState, action) => {
   let result;
@@ -9,7 +9,7 @@ const ValidateAddressFormReducer = (state = initialState, action) => {
   switch (action.type) {
     case VALIDATE_ADDRESS_FORM:
       result = Object.assign({}, state, {
-        validatedaddressFormFields: action.payload
+        validatedAddressFormFields: action.payload
       });
       break;
     default:
