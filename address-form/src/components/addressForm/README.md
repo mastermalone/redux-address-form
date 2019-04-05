@@ -1,14 +1,14 @@
 # Address From Component
 
-The addressForm component is a customizeable react component that can be used once or many times within a parent component.
+The addressForm component is a customizable react component that can be used once or many times within a parent component or page.
 
 ## Usage
 
-The component depends on data that is provided to it via dropDownData attribute. The data provided is for the country states (i.e. Unites States or Canada).  There is a json/countriesStates.json file that contains states for the U.S. and Canada.  The data must be formated in the follow shape:
+The component depends on data that is provided to it via dropDownData attribute. The data provided is for the country states (i.e. Unites States or Canada).  There is a static/json/countriesStates.json file that contains states for the U.S. and Canada. The data must be formated in the follow shape:
 { 
   name: "United States", 
-  abbrievation: "US", 
-  states:[
+  abbreviation: "US", 
+  states: [ 
     { 
       name: "Alabama", 
       abbreviation: "AL"
@@ -22,7 +22,7 @@ The component depends on data that is provided to it via dropDownData attribute.
 }
 
 ## Formatting the states data from public/json/countriesStates.json
-Just add this function to your component that is consuming the addressForm:
+Just add this function to your parent component that is consuming the addressForm:
   formatCountryData(data) {
     const formattedCountryData = {};
     for (let key of data) {
@@ -38,12 +38,12 @@ Add a countries property of your components state:
     countries: []
   };
 
-Set the value of of this.states.country to the respons.data value retrieved from calling the json file via axios.then(response => {this.setState(countries: response.data)}).  
+Set the value of this.states.country to the respons.data value retrieved from calling the json file via axios.then(response => {this.setState(countries: response.data)}).  
 
-In the render method of your component, call formatCountryData() and pass in this.state.countries.
+In the render() method of your component, call formatCountryData(this.state.countries).
 
 ## Hiding fields and/or submit button
-You can hide any field or the submit button by adding an attribute the the component page element.  The attribut will be hideNameOfField={true}.  The following example hides the first name field and the submit button
+You can hide any field or the submit button by adding an attribute the component page element.  The attribut will be hideNameOfField={true}.  The following example hides the first name field and the submit button
 
 Example: <AddressForm
             onSubmit={this.submit}

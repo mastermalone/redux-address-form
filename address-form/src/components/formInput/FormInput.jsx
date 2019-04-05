@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/label-has-for */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FormInput = ({
-  labelName,
+  name,
   checked,
   type,
   className,
@@ -10,9 +12,9 @@ const FormInput = ({
   meta: { touched, error, warning },
 }) => (
   <div className={`${className} has-success`}>
-    <label htmlFor={labelName}>{label}</label>
+    <label htmlFor={name}>{label}</label>
     <input
-      id={labelName}
+      id={name}
       {...input}
       placeholder={label}
       type={type}
@@ -27,5 +29,25 @@ const FormInput = ({
         || (warning && <small className="text-warning">{warning}</small>))}
   </div>
 );
+
+FormInput.defaultProps = {
+  name: '',
+  checked: false,
+  type: '',
+  className: '',
+  label: '',
+  input: [],
+  meta: {},
+};
+
+FormInput.propTypes = {
+  name: PropTypes.string,
+  checked: PropTypes.bool,
+  type: PropTypes.string,
+  className: PropTypes.string,
+  label: PropTypes.string,
+  input: PropTypes.instanceOf(Object),
+  meta: PropTypes.instanceOf(Object),
+};
 
 export default FormInput;

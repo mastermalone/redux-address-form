@@ -1,188 +1,144 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
 
 import FormInput from '../formInput/FormInput';
 import FormSelect from '../formSelect/FormSelect';
 import RadioButtonGroup from '../radioButtonGroup/RadioButtonGroup';
-import validate from '../../validation/AddressFormValidation';
 
 let AddressFields = (props) => {
-  const {
+    const {
     handleSubmit,
     onChange,
-    defaultCountry,
     dropdownData,
     country,
-    hideFirstName,
-    hideLastName,
-    hideAddress1,
-    hideAddress2,
-    hideCity,
-    hideStates,
-    hideZipCode,
-    hideEmail,
-    hideSubmit,
+    fieldLabels,
+    countryLabels,
+    selectOnChange,
+    selectOption,
+    selectPlaceHolder,
+    defaultCountry,
   } = props;
   return (
-    <form onSubmit={handleSubmit} className="container">
-      {!hideFirstName && (
+    <form onSubmit={handleSubmit} className="container address-form-component">
+      {console.log('WTH IS Selected option', selectOption)}
+      {fieldLabels.firstName && (
         <Field
           name="firstName"
-          label="First Name"
+          label={fieldLabels.firstName}
           className="form-group"
           component={FormInput}
           type="text"
-          labelName="firstName"
         />
       )}
-      {!hideLastName && (
+      {fieldLabels.lastName && (
         <Field
           name="lastName"
-          label="Last Name"
+          label={fieldLabels.lastName}
           className="form-group"
           component={FormInput}
           type="text"
-          labelName="lastName"
         />
       )}
-      {!hideAddress1 && (
+      {fieldLabels.address1 && (
         <Field
           name="address1"
-          label="Address 1"
+          label={fieldLabels.address1}
           className="form-group"
           component={FormInput}
           type="text"
-          labelName="address1"
         />
       )}
-      {!hideAddress2 && (
+      {fieldLabels.address2 && (
         <Field
           name="address2"
-          label="Address 2"
+          label={fieldLabels.address2}
           className="form-group"
           component={FormInput}
           type="text"
-          labelName="address2"
         />
       )}
-      {!hideCity && (
+      {fieldLabels.city && (
         <Field
           name="city"
-          label="City"
+          label={fieldLabels.city}
           className="form-group"
           component={FormInput}
           type="text"
-          labelName="city"
         />
       )}
-      {!hideStates && (
+      {fieldLabels.state && (
         <RadioButtonGroup
           buttonList={dropdownData}
           onChange={onChange}
           className="form-check-label float-left"
-          country={country}
+          setChecked={defaultCountry}
+          checked={country}
+          labels={countryLabels}
+          name="country"
         />
       )}
-      {!hideStates && (
+      {fieldLabels.state && (
         <Field
           name="state"
-          label="State/Province"
+          label={fieldLabels.state}
           className="form-control clearfix"
           component={FormSelect}
-          data={dropdownData[country || defaultCountry].states}
-          onChange={onChange}
-          labelName="state"
+          data={dropdownData[defaultCountry || countryLabels[0]].states}
+          selectOnChange={selectOnChange}
+          selectOption={selectOption}
+          placeHolder={selectPlaceHolder}
         />
       )}
-      {!hideZipCode && (
+      {fieldLabels.zipcode && (
         <Field
           name="zipcode"
-          label="Zip"
+          label={fieldLabels.zipcode}
           className="form-group"
           component={FormInput}
           type="number"
-          labelName="zipcode"
         />
       )}
-      {!hideEmail && (
+      {fieldLabels.email && (
         <Field
           name="email"
-          label="Email"
+          label={fieldLabels.email}
           className="form-group"
           component={FormInput}
           type="email"
-          labelName="email"
         />
       )}
-      {!hideSubmit && (
+      {fieldLabels.submit && (
         <button type="submit" className="btn btn-primary float-right">
-          Submit
+          {fieldLabels.submit}
         </button>
       )}
     </form>
   );
 };
 
-
 AddressFields.defaultProps = {
   handleSubmit: () => false,
   onChange: () => false,
-  defaultCountry: 'United States',
   dropdownData: [],
   country: '',
-  hideFirstName: false,
-  hideLastName: false,
-  hideAddress1: false,
-  hideAddress2: false,
-  hideCity: false,
-  hideStates: false,
-  hideZipCode: false,
-  hideEmail: false,
-  hideSubmit: false,
+  countryLabels: [],
+  selectOnChange: () => false,
+  selectOption: '',
+  selectPlaceHolder: '',
+  defaultCountry: ''
 };
 
 AddressFields.propTypes = {
   handleSubmit: PropTypes.func,
   onChange: PropTypes.func,
-  defaultCountry: PropTypes.string,
-  dropdownData: PropTypes.object,
+  dropdownData: PropTypes.instanceOf(Object),
   country: PropTypes.string,
-  hideFirstName: PropTypes.bool,
-  hideLastName: PropTypes.bool,
-  hideAddress1: PropTypes.bool,
-  hideAddress2: PropTypes.bool,
-  hideCity: PropTypes.bool,
-  hideStates: PropTypes.bool,
-  hideZipCode: PropTypes.bool,
-  hideEmail: PropTypes.bool,
-  hideSubmit: PropTypes.bool,
+  countryLabels: PropTypes.instanceOf(Object),
+  selectOnChange: PropTypes.func,
+  selectOption: PropTypes.string,
+  selectPlaceHolder: PropTypes.string,
+  defaultCountry: PropTypes.string
 };
 
-// Set up the form value selector to get the field values
-const selector = formValueSelector('address-form');
-AddressFields = connect((state) => {
-  const country = selector(state, 'country');
-  const firstName = selector(state, 'firstName');
-  const lastName = selector(state, 'lastName');
-  const address1 = selector(state, 'address1');
-  const address2 = selector(state, 'address2');
-  const city = selector(state, 'city');
-  const zipcode = selector(state, 'zipcode');
-  const email = selector(state, 'email');
-  return {
-    country,
-    firstName,
-    lastName,
-    address1,
-    address2,
-    city,
-    zipcode,
-    email,
-  };
-})(AddressFields);
-
-export default reduxForm({
-  validate,
-})(AddressFields);
+export default AddressFields;

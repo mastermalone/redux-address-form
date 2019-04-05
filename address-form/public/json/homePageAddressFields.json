@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "status": 200,
+  "fields": {
+    "address1": "Address 1",
+    "address2": "Address 2",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "country": "Country",
+    "city": "City",
+    "state": "State/Province",
+    "zipcode": "Zip",
+    "email": "Email Address",
+    "submit": "Submit"
+  }
+}

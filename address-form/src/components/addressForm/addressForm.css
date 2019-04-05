@@ -19,3 +19,7 @@ form.container {
 .form-check-label {
   margin-right: 10px;
 }
+
+form.address-form-component .form-group label{
+  display: block;
+}

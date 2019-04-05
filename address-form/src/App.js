@@ -9,52 +9,98 @@ import "bootstrap/dist/css/bootstrap.css";
 import store from "./store/store";
 
 class App extends Component {
+  state = {
+    countries: [],
+    fieldLabels: {},
+    countryLabels: [],
+    country: 'United States',
+    selectOption: '',
+    selectPlaceHolder: 'Select a State'
+  };
+  
   submit = values => {
     return values;
   };
 
-  defaultCountry = "United States";
-
-  formOnChange = values => {
-    return values.country || "United States";
+  radioChange = values => {
+    // console.log('THE VALUES FORM RADIOS', values.country)
+    this.setState({
+      country: values.country
+    });
+    this.setState({
+      selectOption: ''
+    });
+    // return values.country;
   };
+
+  selectOnChange = values => {
+    this.setState({
+      selectOption: values
+    });
+    // return this.getStatesData(this.selectOption)
+  }
 
   formatCountryData(data) {
     const formattedCountryData = {};
     for (let key of data) {
-      if (!formattedCountryData[key.name]) {
-        formattedCountryData[key.name] = key;
+      if (!formattedCountryData[key.label]) {
+        formattedCountryData[key.label] = key;
       }
     }
     return formattedCountryData;
   }
 
-  state = {
-    countries: []
-  };
+  getLabels = async () => {
+    await axios({
+      method: 'get',
+      url:  "./json/homePageAddressFields.json"
+    })
+    .then((response) => {
+      console.log('THE FIELDS', response.data);
+      this.setState({
+        fieldLabels: response.data
+      });
+    })
+    .then(() =>{
+      this.getStatesData();
+    })
+    .catch((err) => {
+      console.warn('There was an error fetching the data', err);
+    })
+  }
 
-  componentDidMount() {
-    const getData = async () => {
-      await axios({
-        method: "get",
-        url: "./json/countriesStates.json"
-      })
-        .then(response => {
-          store.dispatch(GetStatesActionCreator(response.data));
-          this.setState({
-            countries: store.getState().GetStatesReducer.statesData
-          });
-        })
-        .catch(err => {
-          console.warn("There was an error fetching the states", err);
+  getStatesData = async () => {
+    await axios({
+      method: "get",
+      url: "./json/countriesStates.json"
+    })
+      .then(response => {
+        store.dispatch(GetStatesActionCreator(response.data));
+        console.log('the DATA', response.data);
+        this.setState({
+          countryLabels: [response.data[0].label, response.data[1].label]
         });
-    };
-    getData();
+        this.setState({
+          countries: response.data
+        });
+      })
+      .catch(err => {
+        console.warn("There was an error fetching the states", err);
+      });
+  };
+  
+  componentDidMount() {
+    this.getLabels();
   }
 
   render() {
     const countries = this.state.countries;
+    const fields = this.state.fieldLabels.fields;
+    const countryLabels = this.state.countryLabels;
     const formattedCountries = this.formatCountryData(countries);
+    const selectOption = this.state.selectOption;
+    const defaultCountry = this.state.country;
+    const selectPlaceHolder = this.state.selectPlaceHolder;
     return (
       <div className="App">
         <div>
@@ -62,16 +108,21 @@ class App extends Component {
             <AddressForm
               onSubmit={this.submit}
               dropdownData={formattedCountries}
-              onChange={this.formOnChange}
-              defaultCountry={this.defaultCountry}
+              onChange={this.radioChange}
+              selectOnChange={this.selectOnChange}
+              selectOption={selectOption}
+              selectPlaceHolder={selectPlaceHolder}
+              defaultCountry={defaultCountry}
+              countryLabels={countryLabels}
               form="address-form"
+              fieldLabels={fields}
             />
           )}
         </div>
-        {/* <br/>
+        <br/>
         <br/>
 
-        <div>
+        {/* <div>
           {this.state.countries.length > 0 && (
             <AddressForm
               onSubmit={this.submit}
@@ -79,7 +130,7 @@ class App extends Component {
               onChange={this.formOnChange}
               defaultCountry={this.defaultCountry}
               form="my-address-form"
-              hideStates={true}
+              fieldLabels={fields}
             />
           )}
         </div> */}

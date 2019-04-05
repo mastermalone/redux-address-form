@@ -1,4 +1,4 @@
-import { GET_STATES_DATA } from "./GetStatesActions";
+import GET_STATES_DATA from "./GetStatesActions";
 
 const UpdateAddressForm = payload => {
   return {

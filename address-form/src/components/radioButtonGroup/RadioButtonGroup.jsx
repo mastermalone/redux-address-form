@@ -5,39 +5,37 @@ import { Field } from 'redux-form';
 import FormInput from '../formInput/FormInput';
 
 const RadioButtonGroup = (props) => {
-  const { country, className } = props;
+  const { setChecked, className, labels, name } = props;
   return (
     <div className="clearfix">
-      <Field
-        name="country"
-        label="United States"
+      {labels.map(radiobutton => (
+        <Field
+        key={radiobutton}
+        name={name}
+        label={radiobutton}
         className={className}
         component={FormInput}
-        value="United States"
+        value={radiobutton}
         type="radio"
-        checked={country === 'United States'}
+        checked={setChecked === radiobutton}
       />
-      <Field
-        name="country"
-        label="Canada"
-        className={className}
-        component={FormInput}
-        value="Canada"
-        type="radio"
-        checked={country === 'Canada'}
-      />
+      ))}
     </div>
   );
 };
 
 RadioButtonGroup.defaultProps = {
-  country: 'United States',
+  setChecked: '',
   className: '',
+  labels: [],
+  name: ''
 };
 
 RadioButtonGroup.propTypes = {
   country: PropTypes.string,
   className: PropTypes.string,
+  labels: PropTypes.instanceOf(Object),
+  name: PropTypes.string,
 };
 
 export default RadioButtonGroup;
