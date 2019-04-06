@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Field } from 'redux-form';
 import Select from 'react-select';
 
 const FormSelect = (props) => {
@@ -16,7 +17,7 @@ const FormSelect = (props) => {
             <option key={option.label}>{option.label}</option>
           ))}
         </select> */}
-        <Select
+        <Field 
           name={label}
           placeholder={placeHolder}
           id={label}
@@ -26,6 +27,7 @@ const FormSelect = (props) => {
             selectOnChange(option.label);
           }}
           onInputChange={selectOption}
+          component={Select}
         />
       </label>
     </div>

@@ -79,11 +79,10 @@ let AddressFields = (props) => {
         />
       )}
       {fieldLabels.state && (
-        <Field
+        <FormSelect
           name="state"
           label={fieldLabels.state}
           className="form-control clearfix"
-          component={FormSelect}
           data={dropdownData[defaultCountry || countryLabels[0]].states}
           selectOnChange={selectOnChange}
           selectOption={selectOption}

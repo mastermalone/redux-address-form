@@ -43,7 +43,7 @@ Set the value of this.states.country to the respons.data value retrieved from ca
 In the render() method of your component, call formatCountryData(this.state.countries).
 
 ## Hiding fields and/or submit button
-You can hide any field or the submit button by adding an attribute the component page element.  The attribut will be hideNameOfField={true}.  The following example hides the first name field and the submit button
+Fields will be hidden based on whatever data is recieved from CMS data.  For example: if the email key is not part of the "fields" payload given to "fieldLabels", it will not render the email field of the form.
 
 Example: <AddressForm
             onSubmit={this.submit}
@@ -51,8 +51,7 @@ Example: <AddressForm
             onChange={this.formOnChange}
             defaultCountry={this.defaultCountry}
             form="address-form"
-            hideFirstName={true}
-            hideSubmit={true}
+            fieldLabels={fields}
           />
 
 
